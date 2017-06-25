@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Genie :: The highly productive Julia web framework</title>
+  <link rel="stylesheet" href="/css/application.css" />
+</head>
+
+<body>
+  <div class="container">
+    <%
+      include_template("app/layouts/shared/nav.flax.html")
+      include_template("app/layouts/shared/hero.flax.html")
+      @yield
+    %>
+  </div>
+  <script src="/js/application.js"></script>
+</body>
+
+</html>

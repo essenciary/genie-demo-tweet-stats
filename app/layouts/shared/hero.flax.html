@@ -1,0 +1,10 @@
+<div class="page-header">
+  <form class="form-horizontal">
+    <div class="form-group form-group-lg">
+      <input  type="search" class="form-control col-md-12" id="txtSearch"
+              placeholder="Explore Twitter Data: search for a hash to see stats" name="q" value="$( escape_string(@vars(:search_term)) )"
+              onkeyup="this.value = (this.value.startsWith('#') ? this.value.substr(1) : this.value)" autofocus="">
+      <% include_template("app/layouts/shared/recent_searches.flax.html") %>
+    </div>
+  </form>
+</div>

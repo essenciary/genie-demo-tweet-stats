@@ -1,0 +1,46 @@
+<div class="container">
+
+  <!-- charts -->
+  <div class="row" style='display: $(@vars(:search_term) != "" ? "block" : "none")'>
+    <div class="col-md-6">
+      <canvas id="tweets-chart"></canvas>
+    </div>
+    <div class="col-md-3">
+      <canvas id="polarity-chart"></canvas>
+    </div>
+    <div class="col-md-3">
+      <canvas id="subjectivity-chart"></canvas>
+    </div>
+  </div>
+  <!-- end charts -->
+
+  <!-- list of tweets -->
+  <div class="row">
+    <ul class="list-group" id="tweets_list" style="height: 600px; overflow: scroll;">
+      <%
+        foreachvar(:tweet, @vars(:tweets)) do (_)
+          include_template("app/resources/tweets/views/partials/tweet.flax.html")
+        end
+      %>
+      <li>
+        <h4>
+          <center>
+            <br />
+            Waiting for tweets...
+            <div class='uil-ripple-css' style='transform:scale(0.6);'><div></div><div></div></div>
+          </center>
+        </h4>
+      </li>
+    </ul>
+  </div>
+  <!-- end list of tweets -->
+
+</div>
+
+<script>
+  var search_term = '$( @vars(:search_term) )';
+  var polarity = $( @vars(:polarity) );
+  var subjectivity = $( @vars(:subjectivity) );
+  var favorites = $( @vars(:favorites_count) );
+  var retweets = $( @vars(:retweets_count) );
+</script>

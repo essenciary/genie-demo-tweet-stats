@@ -1,0 +1,6 @@
+<sup>Or try a recent search:</sup>
+<ul class="btn-group btn-group-xs" style="margin-left: -40px">
+  <% foreachvar(:search, @vars(:recent_searches)) do (search) %>
+    <li role="presentation" class="btn btn-link"><a href="/?q=$(search.search)"><% search.search %></a></li>
+  <% end %>
+</ul>

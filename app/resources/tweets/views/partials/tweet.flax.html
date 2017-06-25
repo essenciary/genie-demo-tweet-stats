@@ -1,0 +1,15 @@
+<li class="list-group-item" id="tweet_$( @vars(:tweet).id |> Base.get )">
+  <div class="row">
+    <div class="col-sm-1 col-xs-2">
+      <img src="<$ @vars(:tweet).avatar_url $>" alt="user" class="img-circle" />
+    </div>
+    <div>
+      <% @vars(:tweet).user_name %> @<% @vars(:tweet).screen_name %> &nbsp;
+      <% @vars(:tweet).text %> &nbsp;
+      <% sentiment_labels(@vars(:tweet).polarity) %> &nbsp;
+      <% subjectivity_labels(@vars(:tweet).subjective) %> &nbsp;
+      <span class="glyphicon glyphicon-retweet label label-default retweet-count" aria-hidden="true"><span class="item-count"><% @vars(:tweet).retweet_count %></span></span> &nbsp;
+      <span class="glyphicon glyphicon-heart label label-default favorite-count" aria-hidden="true"><span class="item-count"><% @vars(:tweet).favorite_count %></span></span>
+    </div>
+  </div>
+</li>

@@ -1,0 +1,24 @@
+.sentiment-negative {
+  background-color: #FA709A;
+}
+.sentiment-positive {
+  background-color: #2AF598;
+}
+.sentiment-neutral {
+  background-color: #ECE4D9;
+}
+.subjectivity-subjective {
+  background-color: #EF7B47;
+}
+.subjectivity-objective {
+  background-color: #7ACCC8;
+}
+.retweet-count {
+  background-color: #7B6D8D;
+}
+.favorite-count {
+  background-color: #593F62;
+}
+.item-count {
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
