@@ -67,11 +67,11 @@ end
 function tweets_aggregates(filters) :: Tuple{Vector{Int},Vector{Int}}
   result = SearchLight.query_raw("
     SELECT
-      SUM((polarity = -1)::int) AS negative,
-      SUM((polarity = 0)::int) AS neutral,
-      SUM((polarity = 1)::int) AS positive,
-      SUM((subjective = TRUE)::int) AS subjective,
-      SUM((subjective = FALSE)::int) AS objective
+      CAST(SUM(polarity = -1) AS SIGNED) AS negative,
+      CAST(SUM(polarity = 0) AS SIGNED) AS neutral,
+      CAST(SUM(polarity = 1) AS SIGNED) AS positive,
+      CAST(SUM(subjective = TRUE) AS SIGNED) AS subjective,
+      CAST(SUM(subjective = FALSE) AS SIGNED) AS objective
     FROM tweets
     WHERE $(filters[1]) $(filters[2] |> string )") |> first
 
@@ -79,7 +79,7 @@ function tweets_aggregates(filters) :: Tuple{Vector{Int},Vector{Int}}
     r == Union{} ? 0 : r
   end
 
-  [result[1], result[2], result[3]], [result[4], result[5]]
+  [Base.get(result[1]), Base.get(result[2]), Base.get(result[3])], [Base.get(result[4]), Base.get(result[5])]
 end
 
 end

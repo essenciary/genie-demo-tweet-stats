@@ -1,23 +1,15 @@
 dev:
-  adapter:  PostgreSQL
+  adapter:  MySQL
   database: twitterquiz
   host:     localhost
-  username: adrian
-  password: adrian
-  port:     5432
+  username: root
+  port:     3306
+  password: ""
 
-prod:
-  adapter:  PostgreSQL
-  database: db_prod
-  host:     localhost
-  username:
-  password:
-  port:     5432
-
-test:
-  adapter:  PostgreSQL
-  database: db_test
-  host:     localhost
-  username:
-  password:
-  port:     5432
+# dev:
+#   adapter:  PostgreSQL
+#   database: twitterquiz
+#   host:     localhost
+#   username: adrian
+#   port:     5432
+#   password: adrian
