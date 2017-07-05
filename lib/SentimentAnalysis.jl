@@ -1,11 +1,11 @@
 module SentimentAnalysis
 
-using Requests, URIParser, Macros, Logger, App
+using Requests, URIParser, Macros, Logger, App, SearchLight
 
 type SentimentData
   polarity::Int
   polarity_name::String
-  subjective::Bool
+  subjective::Union{Bool,Int}
 end
 
 const AYLIEN_API_URL = "https://api.aylien.com/api/v1/sentiment"
@@ -28,7 +28,7 @@ function to_sentimentdata(data::Dict{String,Any}) :: SentimentData
                   0
                 end
 
-    subjective = data["subjectivity"] == "subjective" ? true : false
+    subjective = data["subjectivity"] == "subjective" ? SearchLight.adapter_type(true) : SearchLight.adapter_type(false)
 
     SentimentData(polarity, data["polarity"], subjective)
   catch ex

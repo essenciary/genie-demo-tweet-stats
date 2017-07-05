@@ -16,7 +16,7 @@ const config =  Settings(
                   log_views         = false,
                   assets_path       = "/",
                   cache_duration    = 0,
-                  flax_compile_templates = true,
+                  flax_compile_templates = false,
                   websocket_server  = true,
                   session_auto_start     = false
                 )

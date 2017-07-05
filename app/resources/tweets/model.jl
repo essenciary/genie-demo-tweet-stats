@@ -17,7 +17,7 @@ type Tweet <: AbstractModel
   favorite_count::Int
   retweet_count::Int
   polarity::Int
-  subjective::Bool
+  subjective::Union{Bool,Int}
 
   ### extra values
   search_hash::String
