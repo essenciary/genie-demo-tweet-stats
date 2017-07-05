@@ -2,7 +2,7 @@ module SentimentAnalysis
 
 using Requests, URIParser, Macros, Logger, App
 
-mutable struct SentimentData
+type SentimentData
   polarity::Int
   polarity_name::String
   subjective::Bool

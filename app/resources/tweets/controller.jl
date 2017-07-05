@@ -12,7 +12,7 @@ function index()
   tweets, polarity, subjectivity, favorites_count, retweets_count = if isempty(search_term)
     Tweets.EMPTY_DATA
   else
-    filters = ["polarity != -100", SQLWhereExpression("text ILIKE ?", "%#$(search_term)%")]
+    filters = ["polarity != -100", SQLWhereExpression("text LIKE ?", "%#$(search_term)%")]
     tweets = SearchLight.find(Tweet, SQLQuery(where = filters, limit = 20, order = "id DESC"))
 
     search = Search(search = search_term)
