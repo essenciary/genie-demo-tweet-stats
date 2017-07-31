@@ -1,19 +1,20 @@
 module CreateTableSearches
 
-using SearchLight
+import Migration: create_table, column, column_id, add_index, drop_table
 
 function up()
-  SearchLight.query("
-    CREATE TABLE searches (
-      id          INTEGER PRIMARY KEY,
-      search      VARCHAR(50) UNIQUE
-    )
-  ")
-  SearchLight.query("CREATE INDEX searches__idx_search ON searches (search)")
+  create_table(:searches) do
+    [
+      column_id()
+      column(:search, :string, limit = 50)
+    ]
+  end
+
+  add_index(:searches, :search, unique = true)
 end
 
 function down()
-  SearchLight.query("DROP TABLE searches")
+  drop_table(:searches)
 end
 
 end
