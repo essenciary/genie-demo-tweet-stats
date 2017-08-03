@@ -1,32 +1,35 @@
 module CreateTableTweets
 
-using Genie, SearchLight
+import Migration: create_sequence, create_table, column_id, column,
+                  column_id_sequence, add_index, drop_table, drop_sequence,
+                  constraint, nextval
 
 function up()
-  SearchLight.query("CREATE SEQUENCE tweets__seq_id")
-  SearchLight.query("
-    CREATE TABLE tweets (
-      id              INTEGER CONSTRAINT tweets__idx_id PRIMARY KEY DEFAULT NEXTVAL('tweets__seq_id'),
-      tweet_id        VARCHAR(24) UNIQUE,
-      text            VARCHAR(512),
-      user_name       VARCHAR(32),
-      screen_name     VARCHAR(32),
-      avatar_url      VARCHAR(512),
-      favorite_count  INTEGER,
-      retweet_count   INTEGER,
-      polarity        INTEGER,
-      subjective      BOOLEAN
-    )
-  ")
-  SearchLight.query("ALTER SEQUENCE tweets__seq_id OWNED BY tweets.id")
-  SearchLight.query("CREATE INDEX tweets__idx_tweet_id ON tweets (id)")
-  SearchLight.query("CREATE INDEX tweets__idx_text ON tweets (text)")
-  SearchLight.query("CREATE INDEX tweets__idx_polarity ON tweets (polarity)")
-  SearchLight.query("CREATE INDEX tweets__idx_subjective ON tweets (subjective)")
+  create_sequence(:tweets, :id)
+  create_table(:tweets) do
+    [
+      column_id(constraint = constraint(:tweets, :id), nextval = nextval(:tweets, :id))
+      column(:tweet_id, :string, limit = 24)
+      column(:text, :string, limit = 512)
+      column(:user_name, :string, limit = 32)
+      column(:screen_name, :string, limit = 32)
+      column(:avatar_url, :string, limit = 512)
+      column(:favorite_count, :integer)
+      column(:retweet_count, :integer)
+      column(:polarity, :integer)
+      column(:subjective, :boolean)
+    ]
+  end
+  column_id_sequence(:tweets, :id)
+
+  add_index(:tweets, :tweet_id, unique = true)
+  add_index(:tweets, :text)
+  add_index(:tweets, :polarity)
+  add_index(:tweets, :subjective)
 end
 
 function down()
-  SearchLight.query("DROP TABLE tweets")
+  drop_table(:tweets)
 end
 
 end
