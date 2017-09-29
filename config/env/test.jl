@@ -8,5 +8,3 @@ const config =  Settings(
                   log_responses       = true,
                   log_router          = true
                 )
-
-export config

@@ -2,7 +2,7 @@ export Tweet, Tweets
 
 using Channels
 
-type Tweet <: AbstractModel
+mutable struct Tweet <: AbstractModel
   ### internals
   _table_name::String
   _id::String

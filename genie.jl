@@ -11,7 +11,7 @@ function bootstrap_genie() :: Void
   const DEFAULT_NWORKERS_SERVER = 1
 
   isfile("env.jl") && include("env.jl")
-  ! haskey(ENV, "GENIE_ENV") && (ENV["GENIE_ENV"] = "dev")
+  haskey(ENV, "GENIE_ENV") || (ENV["GENIE_ENV"] = "dev")
   in("s", ARGS) && ! haskey(ENV, "NWORKERS") ? ENV["NWORKERS"] = DEFAULT_NWORKERS_SERVER : ( haskey(ENV, "NWORKERS") ? ENV["NWORKERS"] : ENV["NWORKERS"] = DEFAULT_NWORKERS_REPL )
   print_with_color(:green, "\nStarting Genie in >> $(ENV["GENIE_ENV"] |> uppercase) << mode using $(ENV["NWORKERS"]) worker(s) \n\n")
 

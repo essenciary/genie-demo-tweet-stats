@@ -1,10 +1,19 @@
+env: dev
+
 dev:
   adapter:  MySQL
   database: twitterquiz
-  host:     localhost
+  host:     127.0.0.1
   username: root
   port:     3306
   password: ""
+
+  config:
+    suppress_output: false
+    output_length: 10000
+    log_db: true
+    log_queries: true
+    log_level: :debug
 
 # dev:
 #   adapter:  PostgreSQL

@@ -1,6 +1,6 @@
 module TweetsController
 
-using App, SearchLight, JSON, Toolbox
+using App, SearchLight, JSON, Toolbox, Sessions
 @dependencies
 
 function index()

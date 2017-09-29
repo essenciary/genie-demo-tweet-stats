@@ -1,6 +1,6 @@
 export Search, Searches
 
-type Search <: AbstractModel
+mutable struct Search <: AbstractModel
   ### internals
   _table_name::String
   _id::String

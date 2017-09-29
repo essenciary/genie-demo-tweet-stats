@@ -1,7 +1,5 @@
 using Configuration
 
-export config
-
 const config =  Settings(
                   output_length       = 0,
                   suppress_output     = false,

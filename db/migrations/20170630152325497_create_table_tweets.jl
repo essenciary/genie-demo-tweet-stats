@@ -1,30 +1,31 @@
 module CreateTableTweets
 
-using Genie, SearchLight
+import Migration: create_table, column, column_id, add_index, drop_table
 
 function up()
-  SearchLight.query("
-    CREATE TABLE tweets (
-      id              INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-      tweet_id        VARCHAR(24) UNIQUE,
-      text            VARCHAR(512),
-      user_name       VARCHAR(32),
-      screen_name     VARCHAR(32),
-      avatar_url      VARCHAR(512),
-      favorite_count  INT,
-      retweet_count   INT,
-      polarity        INT,
-      subjective      BOOL
-    )
-  ")
-  SearchLight.query("CREATE INDEX tweets__idx_tweet_id ON tweets (id)")
-  SearchLight.query("CREATE INDEX tweets__idx_text ON tweets (text)")
-  SearchLight.query("CREATE INDEX tweets__idx_polarity ON tweets (polarity)")
-  SearchLight.query("CREATE INDEX tweets__idx_subjective ON tweets (subjective)")
+  create_table(:tweets) do
+    [
+      column_id()
+      column(:tweet_id, :string, "UNIQUE", limit = 24)
+      column(:text, :string, limit = 512)
+      column(:user_name, :string, limit = 32)
+      column(:screen_name, :string, limit = 32)
+      column(:avatar_url, :string, limit = 512)
+      column(:favorite_count, :integer)
+      column(:retweet_count, :integer)
+      column(:polarity, :integer)
+      column(:subjective, :boolean)
+    ]
+  end
+
+  add_index(:tweets, :tweet_id, unique = true)
+  add_index(:tweets, :text)
+  add_index(:tweets, :polarity)
+  add_index(:tweets, :subjective)
 end
 
 function down()
-  SearchLight.query("DROP TABLE tweets")
+  drop_table(:tweets)
 end
 
 end
