@@ -1,4 +1,8 @@
-export Tweet, Tweets
+module Tweets
+
+using App, SearchLight
+
+export Tweet
 
 using Channels
 
@@ -46,10 +50,6 @@ mutable struct Tweet <: AbstractModel
           favorite_count, retweet_count, polarity, subjective, search_hash, after_save)
 end
 
-module Tweets
-
-using App, SearchLight
-
 const EMPTY_DATA = ([], [0, 0, 0], [0, 0], "[]", "[]")
 
 function tweets_stats(tweets::Vector{Tweet}) :: Tuple{Vector{Int},Vector{Int}}
@@ -75,11 +75,7 @@ function tweets_aggregates(filters) :: Tuple{Vector{Int},Vector{Int}}
     FROM tweets
     WHERE $(filters[1]) $(filters[2] |> string )") |> first
 
-  map(result) do (r)
-    r == Union{} ? 0 : r
-  end
-
-  [Base.get(result[1]), Base.get(result[2]), Base.get(result[3])], [Base.get(result[4]), Base.get(result[5])]
+  [result[:negative], result[:neutral], result[:positive]], [result[:subjective], result[:objective]]
 end
 
 end

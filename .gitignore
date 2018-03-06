@@ -5,6 +5,7 @@ session/*
 cache/*
 docs/build
 !*.gitkeep
+build/*
 
 # Vagrant
 .vagrant

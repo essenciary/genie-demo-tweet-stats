@@ -1,3 +1,3 @@
-using Router
+using Router, TweetsController, TweetsChannel
 
-route("/", "tweets#TweetsController.index")
+route("/", TweetsController.index)
