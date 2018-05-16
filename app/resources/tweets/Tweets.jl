@@ -1,8 +1,10 @@
-export Tweet, Tweets
+module Tweets
 
-using Channels
+using App, SearchLight, Channels
 
-type Tweet <: AbstractModel
+export Tweet
+
+mutable struct Tweet <: AbstractModel
   ### internals
   _table_name::String
   _id::String
@@ -46,9 +48,6 @@ type Tweet <: AbstractModel
           favorite_count, retweet_count, polarity, subjective, search_hash, after_save)
 end
 
-module Tweets
-
-using App, SearchLight
 
 const EMPTY_DATA = ([], [0, 0, 0], [0, 0], "[]", "[]")
 
