@@ -1,6 +1,10 @@
-export Search, Searches
+module Searches
 
-type Search <: AbstractModel
+using App, SearchLight
+
+export Search
+
+mutable struct Search <: AbstractModel
   ### internals
   _table_name::String
   _id::String
@@ -16,6 +20,4 @@ type Search <: AbstractModel
   ) = new("searches", "id", id, search)
 end
 
-module Searches
-using App
 end
